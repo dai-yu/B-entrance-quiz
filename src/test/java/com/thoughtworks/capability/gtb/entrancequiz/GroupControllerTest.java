@@ -31,7 +31,14 @@ public class GroupControllerTest {
 
     @Test
     public void should_save_student() throws Exception{
-        mockMvc.perform(post("/group").param("student","小明"))
+        mockMvc.perform(post("/save").param("student","小明"))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void should_group() throws Exception{
+        mockMvc.perform(get("/group"))
+                .andExpect(jsonPath("$",hasSize(6)))
                 .andExpect(status().isCreated());
     }
 }
