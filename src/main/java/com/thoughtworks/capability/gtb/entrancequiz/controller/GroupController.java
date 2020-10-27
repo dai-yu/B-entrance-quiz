@@ -1,8 +1,7 @@
 package com.thoughtworks.capability.gtb.entrancequiz.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +13,17 @@ public class GroupController {
             "钟无艳","花木兰","雅典娜","芈月","白起","刘禅","庄周","马超","刘备","哪吒","大乔","蔡文姬");
 
     @GetMapping("/students")
+    @CrossOrigin(origins = {"http://localhost:1234"})
     public ResponseEntity<List<String>> getStudents(){
         return ResponseEntity.ok(students);
     }
 
 
+
+    @PostMapping("/group")
+    @CrossOrigin(origins = {"http://localhost:1234"})
+    public ResponseEntity saveStudent(@RequestParam String student){
+        students.add(student);
+        return ResponseEntity.created(null).build();
+    }
 }
